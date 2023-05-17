@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class FloatingTopBar extends StatelessWidget {
 
   final VoidCallback open;
+  final String? username;
 
-  const FloatingTopBar({Key? key, required this.open})
+  const FloatingTopBar({Key? key, required this.open, required this.username})
       : super(key: key);
 
   @override
@@ -36,9 +37,9 @@ class FloatingTopBar extends StatelessWidget {
             color: Colors.black26.withOpacity(0.4),
             borderRadius: BorderRadius.circular(24),
           ),
-          child: const Text("Hello, username",
-              overflow: TextOverflow.fade,
-              style: TextStyle(
+          child: Text("Hi, $username",
+              overflow: TextOverflow.fade, // TODO: Handle this
+              style: const TextStyle(
                 fontFamily: 'Cera Pro',
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.6,

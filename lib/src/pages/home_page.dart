@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:haba/src/features/geolocation/presentation/map_view.dart';
+import 'package:haba/src/utils/secure_local_storage.dart';
 
 import '../utils/map_info_dialogue.dart';
 import '../utils/modalBottomSheet.dart';
@@ -21,6 +23,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  String name = "";
+  Future<void> returnFutureStr() async {
+    Future<String> futureStr = Future.value(await SecureLocalStorage().readSecureData('username'));
+    String res = await futureStr;
+    setState(() {
+      name = res;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    returnFutureStr();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +59,11 @@ class _HomePageState extends State<HomePage> {
                 vertical: 30,
                 horizontal: 20,
               ),
-              child: FloatingTopBar(open: () => modalBottomSheet(
+              child: FloatingTopBar(
+                open: () => modalBottomSheet(
                   context,
                   const ProfileSettings()),
+                  username: name,
               ),
             ),
           ),

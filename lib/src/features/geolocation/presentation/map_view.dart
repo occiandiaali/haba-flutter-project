@@ -99,6 +99,14 @@ class _MapViewState extends State<MapView> {
           ],
         )
       //   const Center(child: CircularProgressIndicator(color: Colors.deepOrange,))
-    ) : const Center(child: CircularProgressIndicator(color: Colors.deepOrange,));
+    ) : Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+          CircularProgressIndicator(color: Colors.deepOrange),
+          SizedBox(height: 24),
+          Text("Pinpointing your location..")
+          ],
+        ));
   }
 }
