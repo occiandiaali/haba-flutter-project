@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haba/src/features/geolocation/data/repository/dummy_users.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -16,6 +17,7 @@ class _MapViewState extends State<MapView> {
   bool coordsSet = false;
 
   late LatLng _pinPoint;
+  List<Marker> markers = [];
 
   Future<LocationData?> _currentLocation() async {
     bool serviceEnabled;
@@ -37,7 +39,6 @@ class _MapViewState extends State<MapView> {
       }
     }
     locationData = await location.getLocation();
-    print("locationData: $locationData");
 
     setState(() {
       _pinPoint = LatLng(locationData.latitude!, locationData.longitude!);
@@ -49,17 +50,32 @@ class _MapViewState extends State<MapView> {
     return locationData;
   }
 
+  void _fakeCoords() {
+    late Marker m;
+    for (var i = 0; i < marks.length; i++) {
+      m = Marker(
+        point: marks[i],
+        width: 80,
+        height: 85,
+        builder: (context) => const Icon(Icons.location_on_rounded, color: Colors.teal,),
+      );
+      markers.add(m);
+    }
+   // return m;
+  }
+
   @override
   void initState() {
     super.initState();
-    // _currentLocation();
     if (mounted) {
       _currentLocation();
+      _fakeCoords();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return coordsSet == true ? SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -88,17 +104,16 @@ class _MapViewState extends State<MapView> {
             MarkerLayer(
               markers: [
                 Marker(
-                  //  point: LatLng(6.6970, 3.4182),
                   point: _pinPoint,
                   width: 80,
                   height: 85,
                   builder: (context) => const Icon(Icons.location_on_rounded, color: Colors.deepOrange,),
                 ),
+                ...markers
               ],
             ),
           ],
         )
-      //   const Center(child: CircularProgressIndicator(color: Colors.deepOrange,))
     ) : Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
