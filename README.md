@@ -2,7 +2,7 @@
 [![](https://img.shields.io/badge/Made_with-Flutter-blue?style=for-the-badge&logo=flutter)](https://flutter.dev/)
 [![](https://img.shields.io/badge/Database-Supabase-teal?style=for-the-badge&logo=supabase)](https://supabase.com/ "Supabase")
 [![](https://img.shields.io/badge/IDE-Android_Studio-teal?style=for-the-badge&logo=android-studio)](https://developer.android.com/studio "Android Studio")  
-Find interesting, vetted, people around you for work, business, romance, friendship, or just company. Wherever you may be.  
+Find interesting, vetted people around you for work, business, romance, friendship, or just company. Wherever you may be.  
 # Logo  
 <img src="https://github.com/occiandiaali/haba-flutter-project/assets/40769994/7986874d-6b58-4526-8850-6b6d4af9a5b1.jpg" height="250" width="250">
 <img src="https://github.com/occiandiaali/haba-flutter-project/assets/40769994/ff9eee7f-bdaf-4ac2-9bcb-6f648df1b2c4.jpg" height="250" width="250">
