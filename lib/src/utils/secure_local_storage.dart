@@ -29,10 +29,6 @@ class SecureLocalStorage {
     return readData;
   }
 
-  // Delete value
-  // Future<void> deleteSecureData(StorageItem item) async {
-  //   await _storage.delete(key: item.key, aOptions: _getAndroidOptions());
-  // }
   Future<void> deleteSecureData(String key) async {
     await _storage.delete(key: key, aOptions: _getAndroidOptions());
   }

@@ -5,6 +5,9 @@ import 'package:haba/src/pages/user_auth_page.dart';
 import 'package:haba/src/utils/check_connection.dart';
 import 'package:simple_connection_checker/simple_connection_checker.dart';
 
+import '../utils/secure_local_storage.dart';
+import 'home_page.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -15,11 +18,25 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   StreamSubscription? subscription;
   bool isConnected = false;
+  String existingUsername = "";
 
   Future _proceedIn(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 7)).then((value) {
-      Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => const UserAuthPage()));
+      if (existingUsername != "" || existingUsername.isNotEmpty) {
+        Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => const HomePage()));
+      } else {
+        Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => const UserAuthPage()));
+      }
+    });
+  }
+
+  Future<void> _returnStoredUsername() async {
+    Future<String> futureStr = Future.value(await SecureLocalStorage().readSecureData('username'));
+    String res = await futureStr;
+    setState(() {
+      existingUsername = res;
     });
   }
 
@@ -35,6 +52,7 @@ class _SplashPageState extends State<SplashPage> {
           isConnected = connected;
         });
         if (isConnected == true) {
+          _returnStoredUsername();
           _proceedIn(context);
         }
       }
@@ -52,8 +70,6 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Container(
         color: Colors.deepOrangeAccent,
-        // height: MediaQuery.of(context).size.height,
-        // width: MediaQuery.of(context).size.width,
         child: Center(
           child: isConnected == true ? Stack(
             children: [
@@ -70,8 +86,6 @@ class _SplashPageState extends State<SplashPage> {
               Image.asset(
                 "assets/images/no_internet.jpg",
                 fit: BoxFit.fill,
-                // height: MediaQuery.of(context).size.height,
-                // width: MediaQuery.of(context).size.width,
               ),
             ],
           ),

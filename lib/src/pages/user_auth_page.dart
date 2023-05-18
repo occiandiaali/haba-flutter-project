@@ -275,12 +275,6 @@ class _UserAuthPageState extends State<UserAuthPage> {
       );
   }
 
-  // void _signInToAccount(context) {
-  //     BlocProvider.of<AppAuthBloc>(context).add(
-  //       SignInRequested(_emailCtrl.text, _passCtrl.text),
-  //     );
-  // }
-
   void _signInToAccount(context) {
     if (existingUsername.isNotEmpty || existingUsername != "") {
       BlocProvider.of<AppAuthBloc>(context).add(
