@@ -59,13 +59,16 @@ class _UserAuthPageState extends State<UserAuthPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Center(
+                            CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.deepOrangeAccent,
                               child: Image.asset(
                                 "assets/images/haba_orange.jpg",
-                                height: 150,
-                                width: 150,
+                                height: 80,
+                                width: 80,
                               ),
                             ),
+                            const SizedBox(height: 18,),
                             Text(
                               hideExtraFields ? "Create a new account" : "Welcome back",
                               style: const TextStyle(
