@@ -20,6 +20,7 @@ class _UserAuthPageState extends State<UserAuthPage> {
   bool hidePassword = true;
   bool hideConfirmPassword = true;
   bool hideExtraFields = false;
+  String existingUsername = "";
 
   @override
   void dispose() {
@@ -27,6 +28,12 @@ class _UserAuthPageState extends State<UserAuthPage> {
     _emailCtrl.dispose();
     _passCtrl.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    returnStoredUsername();
   }
 
   @override
@@ -83,7 +90,7 @@ class _UserAuthPageState extends State<UserAuthPage> {
                                 child: Column(
                                   children: [
                                     Visibility(
-                                      visible: hideExtraFields,
+                                      visible: hideExtraFields || existingUsername.isEmpty || existingUsername == "",
                                       child: TextFormField(
                                         controller: _usernameCtrl,
                                         decoration: const InputDecoration(
@@ -93,9 +100,18 @@ class _UserAuthPageState extends State<UserAuthPage> {
                                             borderSide: BorderSide(color: Colors.deepOrange),
                                           ),
                                         ),
+                                        autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                        validator: (value) {
+                                          String res = '';
+                                          if (value!.isEmpty || value == "") {
+                                            res = 'You need a username!';
+                                          }
+                                          return res;
+                                        },
                                       ),
                                     ),
-                                    SizedBox(height: hideExtraFields ? 12 : 0),
+                                    SizedBox(height: hideExtraFields || existingUsername.isEmpty || existingUsername == "" ? 12 : 0),
                                     TextFormField(
                                       keyboardType: TextInputType.emailAddress,
                                       controller: _emailCtrl,
@@ -244,6 +260,14 @@ class _UserAuthPageState extends State<UserAuthPage> {
     SecureLocalStorage().writeSecureData(username);
   }
 
+  Future<void> returnStoredUsername() async {
+    Future<String> futureStr = Future.value(await SecureLocalStorage().readSecureData('username'));
+    String res = await futureStr;
+    setState(() {
+      existingUsername = res;
+    });
+  }
+
   void _signUpForAccount(context) {
       storeUserName();
       BlocProvider.of<AppAuthBloc>(context).add(
@@ -251,10 +275,23 @@ class _UserAuthPageState extends State<UserAuthPage> {
       );
   }
 
+  // void _signInToAccount(context) {
+  //     BlocProvider.of<AppAuthBloc>(context).add(
+  //       SignInRequested(_emailCtrl.text, _passCtrl.text),
+  //     );
+  // }
+
   void _signInToAccount(context) {
+    if (existingUsername.isNotEmpty || existingUsername != "") {
       BlocProvider.of<AppAuthBloc>(context).add(
         SignInRequested(_emailCtrl.text, _passCtrl.text),
       );
+    } else {
+      storeUserName();
+      BlocProvider.of<AppAuthBloc>(context).add(
+        SignInRequested(_emailCtrl.text, _passCtrl.text),
+      );
+    }
   }
   // end of state class
 }

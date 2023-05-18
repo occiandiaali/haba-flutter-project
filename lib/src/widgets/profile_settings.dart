@@ -99,6 +99,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               title: const Text('Sign Out'),
               onTap: () {
                context.read<AppAuthBloc>().add(SignOutRequested());
+               SecureLocalStorage().deleteSecureData('username');
               },
             ),
           ],

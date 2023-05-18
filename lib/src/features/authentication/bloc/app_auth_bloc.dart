@@ -10,12 +10,26 @@ class AppAuthBloc extends Bloc<AppAuthEvent, AppAuthState> {
   final AppAuthRepo authRepo;
   AppAuthBloc({required this.authRepo}) : super(UnAuthenticated()) {
 
+    // on<SignInRequested>((event, emit) async {
+    //   emit(Loading());
+    //   try {
+    //     await authRepo.signInWithEmail(
+    //         email: event.email,
+    //         password: event.password,
+    //     );
+    //     emit(Authenticated());
+    //   } catch (e) {
+    //     emit(AuthError(e.toString()));
+    //     emit(UnAuthenticated());
+    //   }
+    // });
+
     on<SignInRequested>((event, emit) async {
       emit(Loading());
       try {
         await authRepo.signInWithEmail(
-            email: event.email,
-            password: event.password,
+          email: event.email,
+          password: event.password,
         );
         emit(Authenticated());
       } catch (e) {

@@ -6,9 +6,8 @@ abstract class AppAuthEvent extends Equatable {
 }
 
 class SignInRequested extends AppAuthEvent {
-  final String email;
+ final String email;
   final String password;
-
   SignInRequested(this.email, this.password);
 }
 
