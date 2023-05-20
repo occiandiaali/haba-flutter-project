@@ -43,6 +43,8 @@ dependencies:
   bloc:
   flutter_bloc:
   flutter_map:
+  flutter_map_marker_popup:
+  flutter_map_marker_cluster:
   latlong2:
   image_picker:
   email_validator:
