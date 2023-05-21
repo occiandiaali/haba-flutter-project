@@ -10,7 +10,7 @@ part 'splash_screen_state.dart';
 
 class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
   SplashScreenBloc() : super(Initial()) {
-    on<GoToHomeScreenEvent>((event, emit) async {
+    on<NavigationEvent>((event, emit) async {
       emit(Loading());
       try {
         // [TODO]: Check internet connectivity here?

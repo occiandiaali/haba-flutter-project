@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haba/src/utils/show_snackbar.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -77,11 +77,11 @@ class _AvatarState extends State<Avatar> {
       widget.onUpload(imageUrlResponse);
     } on StorageException catch (error) {
       if (mounted) {
-        context.showErrorSnackBar(message: error.message);
+      //  context.showErrorSnackBar(message: error.message);
       }
     } catch (error) {
       if (mounted) {
-        context.showErrorSnackBar(message: 'Unexpected error occurred');
+      //  context.showErrorSnackBar(message: 'Unexpected error occurred');
       }
     }
 

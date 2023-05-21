@@ -14,7 +14,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
   @override
   void initState() {
     super.initState();
-    _dispatchEvent(context); // dispatches goToHomeScreen event
+  //  _dispatchEvent(context); // dispatches goToHomeScreen event
   }
 
   @override
@@ -33,10 +33,10 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
     );
   }
 
-  void _dispatchEvent(BuildContext context) {
-    BlocProvider.of<SplashScreenBloc>(context).add(
-      GoToHomeScreenEvent(),
-    );
-  }
+  // void _dispatchEvent(BuildContext context) {
+  //   BlocProvider.of<SplashScreenBloc>(context).add(
+  //     GoToHomeScreenEvent(),
+  //   );
+  // }
 }
 
