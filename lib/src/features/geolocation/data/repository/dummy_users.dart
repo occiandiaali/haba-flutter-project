@@ -10,3 +10,14 @@ var marks = [
   LatLng(6.70111, 3.42690),
   LatLng(6.70246, 3.42948),
 ];
+
+var names = [
+  "John Doe",
+  "You are here..",
+  "Jane Wick",
+  "Ben Stolen",
+  "Bose Bad",
+  "Emeka Bond",
+  "Hauwa Ole",
+  "Joe Black"
+];
