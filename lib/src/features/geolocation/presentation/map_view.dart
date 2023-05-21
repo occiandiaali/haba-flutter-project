@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:haba/src/features/geolocation/data/repository/dummy_users.dart';
-import 'package:haba/src/features/geolocation/presentation/map_marker_widget.dart';
+import 'package:haba/src/features/geolocation/presentation/widgets/map_marker_widget.dart';
+import 'package:haba/src/features/geolocation/presentation/widgets/marker_details_widget.dart';
+import 'package:haba/src/utils/modalBottomSheet.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -73,6 +75,7 @@ class _MapViewState extends State<MapView> {
               text: names[i],
               toolTipTap: () {
                 print("Pressed ${names[i]}");
+                modalBottomSheet(context, MarkerDetails(identity: names[i], coords: latLng,));
               },
               iconColour: latLng != _pinPoint ? Colors.teal : Colors.deepOrange,
             )
@@ -127,8 +130,7 @@ class _MapViewState extends State<MapView> {
                      return Container(
                        decoration: BoxDecoration(
                          borderRadius: BorderRadius.circular(20),
-                       //  color: Colors.deepOrange.withOpacity(0.5),
-                         color: Colors.black38.withOpacity(0.3),
+                         color: Colors.deepOrange.withOpacity(0.2),
                        ),
                      );
                     }))
