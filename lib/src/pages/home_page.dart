@@ -1,44 +1,26 @@
-import 'dart:async';
+//import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:haba/src/features/geolocation/presentation/map_view.dart';
-import 'package:haba/src/utils/secure_local_storage.dart';
 
+//import 'package:haba/src/utils/secure_local_storage.dart';
+//import 'package:haba/src/utils/show_snackbar.dart';
+import 'package:haba/src/widgets/profile_top_bar.dart';
+//import 'package:supabase_flutter/supabase_flutter.dart';
+
+//import '../apis/supabase_creds.dart';
 import '../utils/map_info_dialogue.dart';
 import '../utils/modalBottomSheet.dart';
 import '../widgets/expandable_fab.dart';
 import '../widgets/expandable_fab_action_button.dart';
-import '../widgets/floating_top_bar.dart';
 import '../widgets/profile_settings.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
   static Route<void> route() {
     return MaterialPageRoute(
       builder: (context) => const HomePage(),
     );
   }
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-
-  String name = "";
-  Future<void> returnFutureStr() async {
-    Future<String> futureStr = Future.value(await SecureLocalStorage().readSecureData('username'));
-    String res = await futureStr;
-    setState(() {
-      name = res;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    returnFutureStr();
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +41,9 @@ class _HomePageState extends State<HomePage> {
                 vertical: 30,
                 horizontal: 20,
               ),
-              child: FloatingTopBar(
-                open: () => modalBottomSheet(
+              child: ProfileTopBar(open: () => modalBottomSheet(
                   context,
                   const ProfileSettings()),
-                  username: name,
               ),
             ),
           ),

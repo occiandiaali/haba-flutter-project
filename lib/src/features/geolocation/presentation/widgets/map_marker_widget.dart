@@ -25,7 +25,7 @@ class MapMarkerWidget extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           onTap: () => _onTap(key),
           onLongPress: toolTipTap,
-          child: Icon(Icons.pin_drop, size: 30, color: iconColour,),
+          child: Icon(Icons.person_pin_rounded, size: 30, color: iconColour,),
         ),
       ),
     );

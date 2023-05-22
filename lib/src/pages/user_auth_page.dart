@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:haba/src/utils/show_snackbar.dart';
 
 import '../features/authentication/bloc/app_auth_bloc.dart';
 import '../utils/secure_local_storage.dart';
@@ -47,8 +48,9 @@ class _UserAuthPageState extends State<UserAuthPage> {
             }
 
             if (state is AuthError) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.error)));
+              // ScaffoldMessenger.of(context)
+              //     .showSnackBar(SnackBar(content: Text(state.error)));
+              context.showErrorSnackBar(message: state.error);
             }
           },
           child: BlocBuilder<AppAuthBloc, AppAuthState>(
@@ -77,7 +79,7 @@ class _UserAuthPageState extends State<UserAuthPage> {
                             ),
                             const SizedBox(height: 18,),
                             Text(
-                              hideExtraFields ? "Create a new account" : "Welcome back",
+                              hideExtraFields ? "Create a new account" : "Sign In",
                               style: const TextStyle(
                                   fontSize: 28,
                                   fontFamily: 'Cera Pro',
@@ -89,29 +91,29 @@ class _UserAuthPageState extends State<UserAuthPage> {
                               child: Form(
                                 child: Column(
                                   children: [
-                                    Visibility(
-                                      visible: hideExtraFields || existingUsername.isEmpty || existingUsername == "",
-                                      child: TextFormField(
-                                        controller: _usernameCtrl,
-                                        decoration: const InputDecoration(
-                                          labelText: "Username",
-                                          border: OutlineInputBorder(),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.deepOrange),
-                                          ),
-                                        ),
-                                        autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                        validator: (value) {
-                                          String res = '';
-                                          if (value!.isEmpty || value == "") {
-                                            res = 'You need a username!';
-                                          }
-                                          return res;
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(height: hideExtraFields || existingUsername.isEmpty || existingUsername == "" ? 12 : 0),
+                                    // Visibility(
+                                    //   visible: hideExtraFields || existingUsername.isEmpty || existingUsername == "",
+                                    //   child: TextFormField(
+                                    //     controller: _usernameCtrl,
+                                    //     decoration: const InputDecoration(
+                                    //       labelText: "Username",
+                                    //       border: OutlineInputBorder(),
+                                    //       focusedBorder: OutlineInputBorder(
+                                    //         borderSide: BorderSide(color: Colors.deepOrange),
+                                    //       ),
+                                    //     ),
+                                    //     autovalidateMode:
+                                    //     AutovalidateMode.onUserInteraction,
+                                    //     validator: (value) {
+                                    //       String res = '';
+                                    //       if (value!.isEmpty || value == "") {
+                                    //         res = 'You need a username!';
+                                    //       }
+                                    //       return res;
+                                    //     },
+                                    //   ),
+                                    // ),
+                                    // SizedBox(height: hideExtraFields || existingUsername.isEmpty || existingUsername == "" ? 12 : 0),
                                     TextFormField(
                                       keyboardType: TextInputType.emailAddress,
                                       controller: _emailCtrl,
